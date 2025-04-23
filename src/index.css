@@ -1,0 +1,180 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- Light mode base --- */
+@layer base {
+  :root {
+    --background: 260 60% 98%;
+    --foreground: 260 60% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 260 60% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 260 60% 10%;
+
+    --primary: 260 60% 52%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 260, 60%, 90%;
+    --secondary-foreground: 260 60% 30%;
+
+    --muted: 260 10% 90%;
+    --muted-foreground: 260 20% 40%;
+
+    --accent: 260 60% 85%;
+    --accent-foreground: 260 60% 30%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 260 30% 80%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 260 60% 52%;
+
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-roboto;
+    overscroll-behavior: none;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-montserrat font-bold;
+  }
+}
+
+/* === DARK MODE OVERRIDES === */
+@layer base {
+  .dark, [data-theme="dark"] {
+    --background: 242 20% 10%;           /* Fondo oscuro accesible */
+    --foreground: 0 0% 98%;              /* Texto muy claro */
+    --card: 242 20% 16%;                 /* Cartas mucho más oscuras */
+    --card-foreground: 0 0% 98%;         /* Texto claro en cards */
+    --popover: 242 22% 12%;              /* Fondo popover oscuro */
+    --popover-foreground: 0 0% 98%;
+    --primary: 259 80% 65%;              /* Violet accesible */
+    --primary-foreground: 240 17% 16%;   /* Texto oscuro sobre primario */
+    --secondary: 239 16% 26%;            /* Gris púrpura oscuro */
+    --secondary-foreground: 0 0% 100%;
+    --muted: 240 6% 32%;                 /* Gris violeta tenue para muted */
+    --muted-foreground: 240 9% 75%;      /* Textos apagados claros */
+    --accent: 259 76% 60%;               /* Acento violeta */
+    --accent-foreground: 0 0% 100%;    
+    --destructive: 350 82% 51%;          /* Rojo accesible */
+    --destructive-foreground: 0 0% 100%;
+    --border: 242 12% 24%;               /* Bordes bien contrastados */
+    --input: 242 12% 24%;
+    --ring: 259 80% 65%;
+    --radius: 0.75rem;
+    color-scheme: dark;
+  }
+
+  .dark body, [data-theme="dark"] body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+
+  /* Footer styles: dark mode, muy visible, texto blanco */
+  .dark .footer-rynlette {
+    background-color: #1A1F2C !important;  /* Fondo accesible muy oscuro */
+    color: #fff !important;
+    border-top: 1.5px solid #34354c;
+    @apply border-none;
+    backdrop-filter: blur(8px);
+  }
+  .dark .footer-rynlette-copy {
+    color: #ededed !important;
+  }
+
+  /* Hero section text in dark mode (más claro/luminoso) */
+  .dark .ryn-hero-title {
+    @apply text-white;
+    text-shadow: 0 2px 12px #0006;
+  }
+  .dark .ryn-hero-desc {
+    color: #d6bcfa !important;
+    @apply text-gradient;
+    /* aún más luminosa en fondo oscuro */
+    text-shadow: 0 1px 12px #8b5cf688;
+  }
+
+  /* Feature card: dark mode para cards principales */
+  .dark .ryn-feature-card, .dark .card-feature, .dark .feature-card {
+    background-color: #22243a !important; /* Fondo oscuro destacado */
+    color: #fff !important;
+    /* Glass y sombra para separar del fondo */
+    box-shadow: 0 2px 10px 0 #0005;
+    border: 1px solid #34354c;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+  }
+  .dark .ryn-feature-card .text-muted-foreground,
+  .dark .card-feature .text-muted-foreground,
+  .dark .feature-card .text-muted-foreground {
+    color: #d7d7ea !important;
+  }
+}
+
+@layer utilities {
+  .origin-bottom-center {
+    transform-origin: bottom center;
+  }
+
+  /* glass effect for dark */
+  .glass-morphism {
+    @apply backdrop-blur-xl bg-white/5 border border-white/10 shadow-[0_4px_12px_-2px_rgba(0,0,0,0.3)];
+  }
+  .neo-blur {
+    @apply backdrop-blur-2xl bg-black/40 border border-white/10;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-br from-white via-white/90 to-white/70 bg-clip-text text-transparent;
+  }
+  .text-gradient-primary {
+    @apply bg-gradient-to-br from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent;
+  }
+}
+
+/* Wheel sections and pointer, unchanged */
+@layer components {
+  .wheel-section {
+    @apply absolute w-full h-full origin-bottom-center;
+    clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%);
+    transform-origin: center bottom;
+  }
+  
+  .custom-pointer {
+    @apply absolute w-8 h-12 top-0 left-1/2 -translate-x-1/2 -mt-2 z-10;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  }
+  
+  .confetti {
+    @apply fixed w-2 h-4 rounded-sm animate-confetti;
+  }
+}
+
+/* Enhanced wheel spin animation */
+@keyframes spin-wheel {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(var(--spin-deg, 1440deg));
+  }
+}
+
+.animate-spin-wheel {
+  animation: spin-wheel 5s cubic-bezier(0.17, 0.67, 0.12, 0.99) forwards;
+}
+
