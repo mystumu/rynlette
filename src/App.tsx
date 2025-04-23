@@ -16,7 +16,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner position="top-center" closeButton richColors />
-      <BrowserRouter>
+      <BrowserRouter basename="/rynlette-spin-decide-now">
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/crear" element={<CreateWheel />} />

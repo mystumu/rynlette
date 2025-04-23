@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rynlette - Página no encontrada</title>
+  <script>
+    // Solución para SPA hospedadas en GitHub Pages
+    (function() {
+      const path = window.location.pathname;
+      const basePath = '/rynlette-spin-decide-now';
+      
+      // Si la ruta no comienza con la base, redirigir
+      if (!path.startsWith(basePath) || path === basePath + '/404.html') {
+        window.location.replace(basePath + '/');
+      } else {
+        // Para rutas internas, mantener la misma ruta para que React Router la maneje
+        window.location.replace(path.startsWith(basePath + '/') ? path : basePath + '/');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <h1>Redireccionando...</h1>
+  <p>Si no eres redirigido automáticamente, <a href="/rynlette-spin-decide-now/">haz clic aquí</a>.</p>
+</body>
+</html>
